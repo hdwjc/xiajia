@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>下架日期</title>
+  <script src="./time.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div>日期：{{ nowYear + '-' + nowMonth  + '-' + nowDay }}</div>
+    <div v-for="dayNum in dayArr">
+      保质期{{ dayNum }}天：{{ lastTimeObj['day' + dayNum] }}
+    </div>
+  </div>
+</body>
+<script>
+  const { createApp } = Vue
+
+  const app = createApp({
+    data () {
+      return {
+        nowYear,
+        nowMonth,
+        nowDay,
+        dayArr,
+        lastTimeObj
+      }
+    }
+  })
+
+
+  app.mount('#app')
+</script>
+</html>
