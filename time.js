@@ -1,3 +1,4 @@
+let lastTimeObj = {}
 let dayArr = [15, 19, 21, 28, 30, 45, 60, 70, 90, 120]
 
 let date = new Date()
@@ -14,17 +15,19 @@ function calculate (day) {
   return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d)
 }
 
-let lastTimeObj = {}
-
-for (let i = 0, count; i < dayArr.length; i++) {
-  if (dayArr[i] <= 10) {
-    count = 1
-  } else if (dayArr[i] > 10 & dayArr[i] < 30) {
-    count = 2
+function manualCount(n) {
+  let m = 0
+  if (n <= 10) {
+    m = 1
+  } else if (n > 10 & n < 30) {
+    m = 2
   } else {
-    count = 3
+    m = 3
   }
 
-  lastTimeObj[`day${dayArr[i]}`] = calculate(dayArr[i] - count)
+  return calculate(n - m)
 }
 
+for (let i = 0, count; i < dayArr.length; i++) {
+  lastTimeObj[`day${dayArr[i]}`] = manualCount(dayArr[i])
+}
