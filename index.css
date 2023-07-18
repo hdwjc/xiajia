@@ -1,0 +1,37 @@
+@font-face {
+  font-family: yinghua;
+  src: url(./font.ttf);
+}
+
+body {
+  background: #eff2f5;
+  font-family: yinghua;
+}
+
+.today {
+  padding: 19px 0;
+  text-align: center;
+}
+
+.today span {
+  font-size: 28px;
+}
+
+.today h2 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.cell-style {
+  color: #323233;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.show-expire {
+  background: white;
+  border-radius: 8px;
+  margin: 0 16px 8px;
+  padding: 16px;
+  text-align: center;
+}

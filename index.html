@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>下架日期</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://fastly.jsdelivr.net/npm/vant@4/lib/vant.min.js"></script>
+  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/vant@4/lib/index.css"/>
+  <script src="./time.js"></script>
+  <link rel="stylesheet" href="./index.css"/>
+</head>
+<body>
+  <div id="app">
+    <div class="today">
+      <span>今天</span>
+      <h2>{{ nowYear + '-' + nowMonth  + '-' + nowDay }}</h2>
+    </div>
+
+    <van-cell-group inset style="margin-bottom: 8px;">
+      <van-field
+        type="number"
+        center
+        clearable
+        label="保质期"
+        label-class="cell-style"
+        placeholder="输入保质期天数"
+        v-model="t.n"
+        @clear="clearNum"
+      >
+        <template #button>
+          <van-button size="small" type="primary" @click="countResult">确认</van-button>
+        </template>
+      </van-field>
+    </van-cell-group>
+
+    <van-cell-group inset style="margin-bottom: 8px;" v-show="t.show">
+      <van-field label="生产日期" :model-value="t.dateInProduct" style="font-size: 24px; font-weight: 900;" readonly />
+    </van-cell-group>
+
+    <van-cell-group inset>
+      <van-cell title="保质期" value="生产日期" title-class="cell-style" value-class="cell-style"></van-cell>
+      <van-cell v-for="dayNum in dayArr" :title="dayNum + '天'" :value="lastTimeObj['day' + dayNum]" title-class="cell-style" value-class="cell-style"></van-cell>
+    </van-cell-group>
+
+    
+  </div>
+</body>
+<script>
+  const { createApp, ref, reactive } = Vue
+
+  const app = createApp({
+    setup() {
+      const t = reactive({ n: '', dateInProduct: '', show: false })
+
+      function clearNum () {
+        t.n = ''
+        t.show = false
+      }
+
+      function countResult() {
+        t.dateInProduct = calculate(t.n)
+        t.show = true
+      }
+
+      return {
+        nowYear,
+        nowMonth,
+        nowDay,
+        dayArr,
+        lastTimeObj,
+        t,
+        clearNum,
+        countResult
+      }
+    }
+  })
+
+  app.use(vant)
+  app.use(vant.Lazyload)
+
+  app.mount('#app')
+</script>
+</html>
