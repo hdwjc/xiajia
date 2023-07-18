@@ -43,8 +43,6 @@
       <van-cell title="保质期" value="生产日期" title-class="cell-style" value-class="cell-style"></van-cell>
       <van-cell v-for="dayNum in dayArr" :title="dayNum + '天'" :value="lastTimeObj['day' + dayNum]" title-class="cell-style" value-class="cell-style"></van-cell>
     </van-cell-group>
-
-    
   </div>
 </body>
 <script>
@@ -60,6 +58,10 @@
       }
 
       function countResult() {
+        if (t.n === '') {
+          return false
+        }
+
         t.dateInProduct = manualCount(t.n)
         t.show = true
       }
